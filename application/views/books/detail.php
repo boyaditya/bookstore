@@ -49,8 +49,8 @@
                 </div>
                 <div class="col-md-6">
                     <div class="right-content">
-                        <h4>Single Product Name</h4>
-                        <h6>$55.00</h6>
+                        <h4><?= $book['title'] ?></h4>
+                        <h6>Rp <?= number_format($book['price'], 2, ',', '.') ?></h6>
                         <p>Proin commodo, diam a ultricies sagittis, erat odio rhoncus metus, eu feugiat lorem lacus aliquet arcu. Curabitur in gravida nisi, non placerat nibh. Praesent sit amet diam ultrices, commodo turpis id, dignissim leo. Suspendisse mauris massa, porttitor non fermentum vel, ullamcorper scelerisque velit. </p>
                         <span>7 left on stock</span>
                         <form action="" method="get">
@@ -158,4 +158,3 @@
         </div>
     </div>
     <!-- Similar Ends Here -->
-

@@ -37,7 +37,9 @@
 							<div class="featured-item">
 								<img src="assets/images/item-01.jpg" alt="Item 1">
 								<h4><?= $book['title'] ?></h4>
-								<h6><?= $book['price'] ?></h6>
+								<p><?= $book['author'] ?></p>
+								<br>
+								<h6>Rp <?= number_format($book['price'], 2, ',', '.') ?></h6>
 							</div>
 						</a>
 					<?php endforeach; ?>

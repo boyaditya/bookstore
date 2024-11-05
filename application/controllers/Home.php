@@ -15,15 +15,4 @@ class Home extends CI_Controller
         $this->load->view('templates/footer');
 
     }
-
-    public function books()
-    {   
-        "test";
-        // $data['book'] = $this->Book_model->getBookById($id);
-        // var_dump($data);
-
-        // $this->load->view('templates/header');
-        // $this->load->view('home/books');
-        // $this->load->view('templates/footer');
-    }
 }
