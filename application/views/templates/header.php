@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/tooplate-main.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/owl.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/flex-slider.css">
+
     <!--
 Tooplate 2114 Pixie
 https://www.tooplate.com/view/2114-pixie
@@ -40,7 +41,7 @@ https://www.tooplate.com/view/2114-pixie
     </div>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
         <div class="container">
             <a class="navbar-brand" href="#"><img src="<?= base_url() ?>assets/images/header-logo.png" alt=""></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,6 +64,52 @@ https://www.tooplate.com/view/2114-pixie
                         <a class="nav-link" href="contact.html">Contact Us</a>
                     </li>
                 </ul>
+            </div>
+        </div>
+    </nav> -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+
+
+            <a class="navbar-brand" href="<?= base_url() ?>">Berbuku.com</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item <?= ($title_page == 'Home') ? 'active' : '' ?>">
+                        <a class="nav-link" href="<?= base_url('') ?>">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item <?= ($title_page == 'Books') ? 'active' : '' ?>">
+                        <a class="nav-link" href="<?= base_url('') ?>books/">Products</a>
+                    </li>
+
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search by title / author / ISBN here..." aria-label="Search" style="width: 300px;">
+                    <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item <?= ($title_page == 'Cart') ? 'active' : '' ?>">
+                        <a class="nav-link" href="<?= base_url('') ?>cart/">Cart</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Sign In
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                </ul>
+
             </div>
         </div>
     </nav>

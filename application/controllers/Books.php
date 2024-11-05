@@ -7,7 +7,6 @@ class Books extends CI_Controller
     {   
         $data['title_page'] = 'Books';
         $data['books'] = $this->Book_model->getBooks();
-        // var_dump($data);
 
         $this->load->view('templates/header', $data);
         $this->load->view('books/books', $data);
@@ -18,7 +17,6 @@ class Books extends CI_Controller
     {
         $data['title_page'] = 'Detail Book';
         $data['book'] = $this->Book_model->getBookById($id);
-        var_dump($data);
 
         $this->load->view('templates/header', $data);
         $this->load->view('books/detail', $data);

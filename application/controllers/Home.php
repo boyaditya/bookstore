@@ -8,7 +8,6 @@ class Home extends CI_Controller
     {
         $data['title_page'] = 'Home';
         $data['books'] = $this->Book_model->getBooks();
-        var_dump($data);
 
         $this->load->view('templates/header', $data);
         $this->load->view('home/index', $data);

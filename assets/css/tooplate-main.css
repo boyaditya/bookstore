@@ -41,7 +41,7 @@ a {
 	opacity: 0.7;
 }
 .section-heading {
-	margin-top: 80px;
+	margin-top: 40px;
 	margin-bottom: 40px;
 }
 .section-heading .line-dec {
@@ -69,7 +69,7 @@ a {
 }
 
 /* Header Style */
-.navbar .navbar-brand {
+/* .navbar .navbar-brand {
 	text-align: center;
 	width: 100%;
 	position: relative;
@@ -127,20 +127,20 @@ a {
 	font-size: 22px;
 	line-height: 30px;
 	font-family: 'FontAwesome';
-}
+} */
 /* Banner Style */
 .banner {
-	margin-top: 50px;
-	background-image: url(../images/banner-bg.jpg);
+	/* margin-top: 50px; */
+	background-image: url(../images/banner.jpg);
 	background-size: cover;
 	background-repeat: no-repeat;
-	padding: 150px 0px;
+	padding: 70px 0px;
 	background-position: center center;
 }
 .banner .caption {
 	background-color: rgba(250,250,250,0.9);
 	padding: 30px;
-	max-width: 450px;
+	max-width: 280px;
 }
 .banner .caption h2 {
 	margin-top: 0px;
@@ -345,7 +345,7 @@ a {
 
 /* Featured Page Style */
 .featured-page {
-	margin-top: 130px;
+	margin-top: 40px;
 	margin-bottom: 40px;
 }
 .featured-page .section-heading {

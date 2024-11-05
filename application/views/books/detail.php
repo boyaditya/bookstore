@@ -50,9 +50,10 @@
                 <div class="col-md-6">
                     <div class="right-content">
                         <h4><?= $book['title'] ?></h4>
+                        <p>By: <?= $book['author'] ?></p>
                         <h6>Rp <?= number_format($book['price'], 2, ',', '.') ?></h6>
-                        <p>Proin commodo, diam a ultricies sagittis, erat odio rhoncus metus, eu feugiat lorem lacus aliquet arcu. Curabitur in gravida nisi, non placerat nibh. Praesent sit amet diam ultrices, commodo turpis id, dignissim leo. Suspendisse mauris massa, porttitor non fermentum vel, ullamcorper scelerisque velit. </p>
-                        <span>7 left on stock</span>
+                        <p><?= $book['description'] ?></p>
+                        <span><?= $book['stock'] ?> left on stock</span>
                         <form action="" method="get">
                             <label for="quantity">Quantity:</label>
                             <input name="quantity" type="quantity" class="quantity-text" id="quantity"
@@ -63,7 +64,7 @@
                         </form>
                         <div class="down-content">
                             <div class="categories">
-                                <h6>Category: <span><a href="#">Pants</a>,<a href="#">Women</a>,<a href="#">Lifestyle</a></span></h6>
+                                <h6>Category: <span><a href="#"><?= $book['category'] ?></a></h6>
                             </div>
                             <div class="share">
                                 <h6>Share: <span><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-linkedin"></i></a><a href="#"><i class="fa fa-twitter"></i></a></span></h6>
@@ -72,6 +73,19 @@
                     </div>
                 </div>
             </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-12">
+                    <h6>Product Details</h6>
+                    <p><b>ISBN : </b><?= $book['ISBN'] ?></p>
+                    <p><b>Publisher : </b><?= $book['publisher'] ?></p>
+                    <p><b>Published Date : </b><?= $book['published_date']->toDateTime()->format('d M Y') ?></p>
+                    <p><b>Number of Pages : </b><?= $book['pages'] ?></p>
+                    <p><b>Language : </b><?= $book['language'] ?></p>
+
+                </div>
+            </div>
+            <hr>
         </div>
     </div>
     <!-- Single Page Ends Here -->
