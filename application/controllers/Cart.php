@@ -34,6 +34,15 @@ class Cart extends CI_Controller
         redirect('cart');
     }
 
+    public function delete()
+    {
+        $user_id = "672969deee284ad03e964034";
+        $book_id = $this->input->post('book_id');
 
-    
+        var_dump($book_id);
+        // die();
+
+        $this->Cart_model->removeFromCart($user_id, $book_id);
+        redirect('cart');
+    }
 }
