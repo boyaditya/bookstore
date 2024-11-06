@@ -15,7 +15,7 @@ class Cart extends CI_Controller
         // var_dump($data['book']);
 
         // var_dump($data['cart_items']);
-        $data['book'] = $this->Book_model->getBookById($id);
+        // $data['book'] = $this->Book_model->getBookById($id);
         $this->load->view('templates/header', $data);
         $this->load->view('cart/cart', $data);
         $this->load->view('templates/footer');
