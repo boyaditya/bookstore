@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Cart extends CI_Controller
 {
-    public function index($id)
+    public function index($id = null)
     {
         $data['title_page'] = 'Cart';
         $data['cart'] = $this->Cart_model->getCartsByUserId("672969deee284ad03e964034");

@@ -53,9 +53,56 @@ class Cart_model extends CI_Model
             }
         }
 
-
         // var_dump($items);
         return $items;
+    }
+
+    public function addToCart($user_id, $book_id, $quantity)
+    {
+        $this->load->library('mongo_db');
+        $cart = $this->mongo_db->where(['user_id' => new MongoDB\BSON\ObjectId($user_id)])->get('carts');
+
+        if (empty($cart)) {
+            // Create a new cart if it doesn't exist
+            $new_cart = [
+                'user_id' => new MongoDB\BSON\ObjectId($user_id),
+                'items' => [
+                    [
+                        'book_id' => new MongoDB\BSON\ObjectId($book_id),
+                        'quantity' => $quantity
+                    ]
+                ],
+                'updated_at' => new MongoDB\BSON\UTCDateTime()
+            ];
+            $this->mongo_db->insert('carts', $new_cart);
+        } else {
+            // Update existing cart
+            $cart_id = $cart[0]['_id'];
+            $items = $cart[0]['items'];
+            $item_found = false;
+
+            // Check if the book already exists in the cart
+            foreach ($items as &$item) {
+                if ((string) $item['book_id'] === $book_id) {
+                    $item['quantity'] += $quantity;
+                    $item_found = true;
+                    break;
+                }
+            }
+
+            if (!$item_found) {
+                // Add new item to the cart
+                $items[] = [
+                    'book_id' => new MongoDB\BSON\ObjectId($book_id),
+                    'quantity' => $quantity
+                ];
+            }
+
+            // Update the cart in the database
+            $this->mongo_db->where(['_id' => new MongoDB\BSON\ObjectId($cart_id)])
+                ->set(['items' => $items, 'updated_at' => new MongoDB\BSON\UTCDateTime()])
+                ->update('carts');
+        }
     }
 
     

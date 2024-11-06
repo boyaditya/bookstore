@@ -18,6 +18,8 @@ class Books extends CI_Controller
         $data['title_page'] = 'Detail Book';
         $data['book'] = $this->Book_model->getBookById($id);
 
+        // var_dump($data['book']);
+
         $this->load->view('templates/header', $data);
         $this->load->view('books/detail', $data);
         $this->load->view('templates/footer');

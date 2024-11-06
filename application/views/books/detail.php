@@ -49,22 +49,22 @@
                 </div>
                 <div class="col-md-6">
                     <div class="right-content">
-                        <h4><?= $book['title'] ?></h4>
-                        <p>By: <?= $book['author'] ?></p>
-                        <h6>Rp <?= number_format($book['price'], 2, ',', '.') ?></h6>
-                        <p><?= $book['description'] ?></p>
-                        <span><?= $book['stock'] ?> left on stock</span>
+                        <h4><?= $book[0]['title'] ?></h4>
+                        <p>By: <?= $book[0]['author'] ?></p>
+                        <h6>Rp <?= number_format($book[0]['price'], 2, ',', '.') ?></h6>
+                        <p><?= $book[0]['description'] ?></p>
+                        <span><?= $book[0]['stock'] ?> left on stock</span>
                         <form action="" method="get">
                             <label for="quantity">Quantity:</label>
                             <input name="quantity" type="quantity" class="quantity-text" id="quantity"
                                 onfocus="if(this.value == '1') { this.value = ''; }"
                                 onBlur="if(this.value == '') { this.value = '1';}"
                                 value="1">
-                            <input type="submit" class="button" value="Order Now!">
+                            <input type="submit" class="button" value="Add to Cart">
                         </form>
                         <div class="down-content">
                             <div class="categories">
-                                <h6>Category: <span><a href="#"><?= $book['category'] ?></a></h6>
+                                <h6>Category: <span><a href="#"><?= $book[0]['category'] ?></a></h6>
                             </div>
                             <div class="share">
                                 <h6>Share: <span><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-linkedin"></i></a><a href="#"><i class="fa fa-twitter"></i></a></span></h6>
@@ -77,11 +77,11 @@
             <div class="row">
                 <div class="col-md-12">
                     <h6>Product Details</h6>
-                    <p><b>ISBN : </b><?= $book['ISBN'] ?></p>
-                    <p><b>Publisher : </b><?= $book['publisher'] ?></p>
-                    <p><b>Published Date : </b><?= $book['published_date']->toDateTime()->format('d M Y') ?></p>
-                    <p><b>Number of Pages : </b><?= $book['pages'] ?></p>
-                    <p><b>Language : </b><?= $book['language'] ?></p>
+                    <p><b>ISBN : </b><?= $book[0]['ISBN'] ?></p>
+                    <p><b>Publisher : </b><?= $book[0]['publisher'] ?></p>
+                    <p><b>Published Date : </b><?= $book[0]['published_date']->toDateTime()->format('d M Y') ?></p>
+                    <p><b>Number of Pages : </b><?= $book[0]['pages'] ?></p>
+                    <p><b>Language : </b><?= $book[0]['language'] ?></p>
 
                 </div>
             </div>
