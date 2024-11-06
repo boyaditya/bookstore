@@ -89,7 +89,7 @@ https://www.tooplate.com/view/2114-pixie
                     </li>
 
                 </ul>
-                <form class="form-inline my-2 my-lg-0" action="<?= site_url('home/index') ?>" method="get">
+                <form class="form-inline my-2 my-lg-0" action="<?= site_url('books/search') ?>" method="get">
                     <select name="field" class="form-control mr-sm-2">
                         <option value="title">Title</option>
                         <option value="author">Author</option>
@@ -98,6 +98,7 @@ https://www.tooplate.com/view/2114-pixie
                     <input class="form-control mr-sm-2" type="text" name="keyword" placeholder="Search by title, author, ISBN..." aria-label="Search" style="width: 300px;">
                     <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
                 </form>
+
 
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item <?= ($title_page == 'Cart') ? 'active' : '' ?>">

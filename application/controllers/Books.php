@@ -33,7 +33,7 @@ class Books extends CI_Controller
         $this->load->view('books/books', $data);
         $this->load->view('templates/footer');
     }
-    
+
     public function details($id)
     {
         $data['title_page'] = 'Detail Book';
@@ -120,14 +120,26 @@ class Books extends CI_Controller
     // Metode pencarian
     public function search()
     {
-        $field = $this->input->get('field'); // Misalnya: 'title', 'author', atau 'isbn'
-        $keyword = $this->input->get('keyword'); // Kata kunci pencarian
+        // Ambil parameter field dan keyword dari URL (GET request)
+        $field = $this->input->get('field'); // Field pencarian: 'title', 'author', atau 'isbn'
+        $keyword = $this->input->get('keyword'); // Keyword pencarian
 
-        $data['title_page'] = 'Search Results';
-        $data['books'] = $this->Book_model->searchBooks($field, $keyword);
+        // Jika ada parameter pencarian
+        if ($field && $keyword) {
+            $data['books'] = $this->Book_model->searchBooks($field, $keyword);
+            $data['is_search'] = true; // Tandai bahwa ini adalah hasil pencarian
+            $data['search_keyword'] = $keyword; // Simpan kata kunci pencarian untuk ditampilkan
+        } else {
+            $data['books'] = [];
+            $data['is_search'] = true;
+            $data['search_keyword'] = '';
+        }
 
+        $data['title_page'] = 'Books';
+
+        // Load view books/index hanya dengan hasil pencarian
         $this->load->view('templates/header', $data);
-        $this->load->view('books/search_results', $data);
+        $this->load->view('books/books', $data);
         $this->load->view('templates/footer');
     }
 }
