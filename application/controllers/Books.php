@@ -30,7 +30,7 @@ class Books extends CI_Controller
 
         // Load view utama index.php
         $this->load->view('templates/header', $data);
-        $this->load->view('books/index', $data);
+        $this->load->view('books/books', $data);
         $this->load->view('templates/footer');
     }
     
