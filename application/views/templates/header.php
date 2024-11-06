@@ -108,10 +108,10 @@ https://www.tooplate.com/view/2114-pixie
                             Sign In
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="<?= site_url('auth/login') ?>">Login</a>
+                        <!-- <a class="dropdown-item" href="#">Another action</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item" href="#">Something else here</a> -->
                         </div>
                     </li>
                 </ul>
