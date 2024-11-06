@@ -31,7 +31,7 @@
                     <div class="right-content">
                         <h4><?= $item['book']['title'] ?></h4>
                         <h6>Rp <?= number_format($item['book']['price'], 2, ',', '.') ?></h6>
-                        <form action="<?= base_url() ?>cart/remove" method="post">
+                        <form action="<?= base_url() ?>cart/delete" method="post">
                             <input type="hidden" name="book_id" value="<?= $item['book']['_id']->{'$id'} ?>">
                             <label for="quantity-<?= $index ?>">Quantity:</label>
                             <div class="input-group mb-3" style="max-width: 150px;">
