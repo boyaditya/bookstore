@@ -63,12 +63,13 @@
                         <h6>Rp <?= number_format($book['price'], 2, ',', '.') ?></h6>
                         <p><?= $book['description'] ?></p>
                         <span><?= $book['stock'] ?> left on stock</span>
-                        <form action="" method="get">
+                        <form action="<?= base_url() ?>cart/add" method="post">
                             <label for="quantity">Quantity:</label>
                             <input name="quantity" type="quantity" class="quantity-text" id="quantity"
                                 onfocus="if(this.value == '1') { this.value = ''; }"
                                 onBlur="if(this.value == '') { this.value = '1';}"
                                 value="1">
+                            <input type="hidden" name="book_id" value="<?= $book['_id']->{'$id'} ?>">
                             <input type="submit" class="button" value="Order Now!">
                         </form>
                         <div class="down-content">

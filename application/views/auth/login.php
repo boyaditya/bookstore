@@ -90,8 +90,8 @@
         <h2>Login</h2>
         <form method="POST" action="<?php echo site_url('auth/login'); ?>">
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required placeholder="Enter your email">
+                <label for="username">Username</label>
+                <input type="username" id="username" name="username" required placeholder="Enter your username">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
