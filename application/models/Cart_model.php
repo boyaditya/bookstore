@@ -30,18 +30,6 @@ class Cart_model extends CI_Model
         $cart = $this->mongo_db->where(['_id' => new MongoDB\BSON\ObjectId($cart_id)])->get('carts');
         $items = !empty($cart) ? $cart[0]['items'] : [];
 
-
-
-        // foreach ($items as $key => $item) {
-        //     $book = $this->Book_model->getBookById($item->book_id);
-        //     $items[$key]->book = $book[0];
-
-
-        //     // $items[$key]['book'] = $book;
-        //     // var_dump($item->book_id);
-        //     // var_dump($book);
-        // }
-
         // Fetch book details for each item and include quantity
         $this->load->model('Book_model');
         foreach ($items as $key => $item) {
@@ -53,7 +41,6 @@ class Cart_model extends CI_Model
             }
         }
 
-        // var_dump($items);
         return $items;
     }
 
@@ -77,8 +64,8 @@ class Cart_model extends CI_Model
             $this->mongo_db->insert('carts', $new_cart);
         } else {
             // Update existing cart
-            $cart_id = $cart[0]['_id'];
-            $items = $cart[0]['items'];
+            $cart_id = $cart[0]['_id']->{'$id'};
+            $items = $this->getCartItems($cart_id);
             $item_found = false;
 
             // Check if the book already exists in the cart
