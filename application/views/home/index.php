@@ -39,7 +39,7 @@
                             <?php foreach ($books as $book): ?>
                                 <a href="<?= base_url() ?>books/details/<?= $book['_id']->{'$id'} ?>">
                                     <div class="featured-item">
-                                        <img src="assets/images/item-01.jpg" alt="Item 1">
+                                    <img src="<?= $book['cover_image'] ?>" alt="<?= $book['title'] ?>" class="img-fluid" />
                                         <h4><?= $book['title'] ?></h4>
                                         <p><?= $book['author'] ?></p>
                                         <br>

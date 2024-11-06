@@ -3,21 +3,30 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Cart extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('Book_model');
+        $this->load->model('Cart_model');
+    }
+
     public function index($id = null)
     {
         $data['title_page'] = 'Cart';
         $data['cart'] = $this->Cart_model->getCartsByUserId("672969deee284ad03e964034");
 
-        // var_dump($data['cart'][0]['_id']->{'$id'});
-        $data['cart_items'] = $this->Cart_model->getCartItems($data['cart'][0]['_id']->{'$id'});
+        // Ambil item dari keranjang
+        $cartItems = $this->Cart_model->getCartItems($data['cart'][0]['_id']->{'$id'});
 
-        // var_dump($data['cart_items']);
+        // Tambahkan informasi gambar pada setiap item di keranjang
+        foreach ($cartItems as &$item) {
+            // Dapatkan data buku dari database menggunakan Book_model
+            $bookData = $this->Book_model->getBookById($item['book_id']);
+            $item['book']['cover_image'] = $bookData['cover_image']; // Menambahkan cover_image ke dalam setiap item
+        }
+        
+        $data['cart_items'] = $cartItems;
 
-        // $data['book'] = $data['cart_items'];
-        // var_dump($data['book']);
-
-        // var_dump($data['cart_items']);
-        // $data['book'] = $this->Book_model->getBookById($id);
         $this->load->view('templates/header', $data);
         $this->load->view('cart/cart', $data);
         $this->load->view('templates/footer');

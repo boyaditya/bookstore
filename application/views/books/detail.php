@@ -22,34 +22,14 @@
                     <div class="product-slider">
                         <div id="slider" class="flexslider">
                             <ul class="slides">
-                                <li>
-                                    <img src="<?= base_url() ?>assets/images/big-01.jpg" />
-                                </li>
-                                <li>
-                                    <img src="<?= base_url() ?>assets/images/big-02.jpg" />
-                                </li>
-                                <li>
-                                    <img src="<?= base_url() ?>assets/images/big-03.jpg" />
-                                </li>
-                                <li>
-                                    <img src="<?= base_url() ?>assets/images/big-04.jpg" />
-                                </li>
+                                <img src="<?= $book['cover_image'] ?>" alt="<?= $book['title'] ?>" class="img-fluid" />
                                 <!-- items mirrored twice, total of 12 -->
                             </ul>
                         </div>
                         <div id="carousel" class="flexslider">
                             <ul class="slides">
                                 <li>
-                                    <img src="<?= base_url() ?>assets/images/thumb-01.jpg" />
-                                </li>
-                                <li>
-                                    <img src="<?= base_url() ?>assets/images/thumb-02.jpg" />
-                                </li>
-                                <li>
-                                    <img src="<?= base_url() ?>assets/images/thumb-03.jpg" />
-                                </li>
-                                <li>
-                                    <img src="<?= base_url() ?>assets/images/thumb-04.jpg" />
+                                    <img src="<?= $book['cover_image'] ?>" alt="<?= $book['title'] ?>" class="img-fluid" />
                                 </li>
                                 <!-- items mirrored twice, total of 12 -->
                             </ul>
@@ -115,7 +95,7 @@
                         <?php foreach ($booklist as $books): ?>
                             <a href="<?= base_url('books/details/' . $books['_id']->{'$id'}) ?>"> 
                                 <div class="featured-item">
-                                    <img src="<?= base_url() ?>assets/images/product-01.jpg" alt="">
+                                <img src="<?= $book['cover_image'] ?>" alt="<?= $book['title'] ?>" class="img-fluid" />
                                     <h4><?= $books['title'] ?></h4>
                                     <p><?= $books['author'] ?></p>
                                     <h6>Rp <?= number_format($books['price'], 2, ',', '.') ?></h6>

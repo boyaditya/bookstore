@@ -20,8 +20,8 @@
                     <div class="product-slider">
                         <div id="slider" class="flexslider">
                             <ul class="slides">
-                                <li>
-                                    <img src="<?= $item['book']['cover_image'] ?>" alt="<?= $item['book']['title'] ?>" />
+                                <!-- Menampilkan cover_image -->
+                                <img src="<?= $item['book']['cover_image'] ?>" alt="<?= $item['book']['title'] ?>" class="img-fluid" />
                                 </li>
                             </ul>
                         </div>
@@ -132,6 +132,7 @@
     <?php if (!empty($cart_items)) { ?>
         document.getElementById('checkout-button').addEventListener('click', function() {
             alert('Proceed to checkout');
+            window.location.href = '<?= base_url() ?>index.php';
         });
     <?php } ?>
 </script>
