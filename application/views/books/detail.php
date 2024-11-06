@@ -113,7 +113,7 @@
                 <class="col-md-12">
                     <div class="owl-carousel owl-theme" style="margin-right: 1000px;>
                         <?php foreach ($booklist as $books): ?>
-                            <a href="<?= base_url('books/details/' . $books['_id']->{'$id'}) ?>">  <!-- Link untuk menuju detail buku -->
+                            <a href="<?= base_url('books/details/' . $books['_id']->{'$id'}) ?>"> 
                                 <div class="featured-item">
                                     <img src="<?= base_url() ?>assets/images/product-01.jpg" alt="">
                                     <h4><?= $books['title'] ?></h4>

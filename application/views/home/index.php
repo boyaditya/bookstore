@@ -25,29 +25,31 @@
             <div class="col-md-12">
                 <div class="section-heading">
                     <div class="line-dec"></div>
-                    <h1><?= isset($keyword) ? 'Search Results' : 'Featured Items' ?></h1>
+                        <h1><?= isset($keyword) ? 'Search Results' : 'Featured Items' ?></h1>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-12">
-                <?php if (empty($books)) : ?>
-                    <p>No results found.</p>
-                <?php else : ?>
-                    <div class="owl-carousel owl-theme">
-                        <?php foreach ($books as $book): ?>
-                            <a href="<?= base_url() ?>books/details/<?= $book['_id']->{'$id'} ?>">
-                                <div class="featured-item">
-                                    <img src="assets/images/item-01.jpg" alt="Item 1">
-                                    <h4><?= $book['title'] ?></h4>
-                                    <p><?= $book['author'] ?></p>
-                                    <br>
-                                    <h6>Rp <?= number_format($book['price'], 2, ',', '.') ?></h6>
-                                </div>
-                            </a>
-                        <?php endforeach; ?>
-                    </div>
-                <?php endif; ?>
-            </div>
+                <div class="col-md-12">  
+                    <?php if (empty($books)) : ?>
+		                    <a class="btn btn-success" href="<?= base_url('books/create') ?>" role="button">Add New Book</a>	 
+                        <p>No results found.</p>
+                    <?php else : ?>
+                            <a class="btn btn-success" href="<?= base_url('books/create') ?>" role="button">Add New Book</a>		 
+                        <div class="owl-carousel owl-theme">
+                            <?php foreach ($books as $book): ?>
+                                <a href="<?= base_url() ?>books/details/<?= $book['_id']->{'$id'} ?>">
+                                    <div class="featured-item">
+                                        <img src="assets/images/item-01.jpg" alt="Item 1">
+                                        <h4><?= $book['title'] ?></h4>
+                                        <p><?= $book['author'] ?></p>
+                                        <br>
+                                        <h6>Rp <?= number_format($book['price'], 2, ',', '.') ?></h6>
+                                    </div>
+                                </a>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
         </div>
     </div>
-</div>
 <!-- Featured Ends Here -->
