@@ -9,27 +9,33 @@ class User_model extends CI_Model {
     }
 
     public function register($data) {
-        // Cek apakah email sudah terdaftar
-        $result = $this->mongo_db->findOne('users', ['email' => $data['email']]);
-        if (count($result) > 0) {
-            return false; // Email sudah terdaftar
+        // Validasi apakah email sudah terdaftar
+        $result = $this->mongo_db->where(['email' => $data['email']])->limit(1)->get('users');
+        if (!empty($result)) {
+            return false; // Jika email sudah ada, kembalikan false
         }
-
-        // Masukkan data ke MongoDB
+    
+        // Menambahkan `created_at` dengan tanggal sekarang
+        $data['created_at'] = new MongoDB\BSON\UTCDateTime();
+    
+        // Enkripsi password sebelum disimpan
+        $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
+    
+        // Simpan data ke MongoDB
         $this->mongo_db->insert('users', $data);
-        return true;
+        return true; // Mengembalikan true jika berhasil
     }
-
+    
     public function login($email, $password) {
         // Cari user berdasarkan email
-        $result = $this->mongo_db->findOne('users', ['email' => $email]);
-
-        if (count($result) > 0) {
+        $result = $this->mongo_db->where(['email' => $email])->limit(1)->get('users');
+        
+        if (!empty($result)) {
             // Periksa password
-            if (password_verify($password, $result[0]->password)) {
+            if (password_verify($password, $result[0]['password'])) {
                 return $result[0]; // Login berhasil
             }
         }
         return false; // Login gagal
     }
-}
+    }

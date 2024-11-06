@@ -23,7 +23,7 @@
             border-radius: 8px;
             padding: 30px;
             width: 100%;
-            max-width: 400px;
+            max-width: 500px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
         .register-card h2 {
@@ -41,7 +41,7 @@
             color: #555;
             margin-bottom: 5px;
         }
-        .form-group input {
+        .form-group input, .form-group textarea {
             width: 100%;
             padding: 12px;
             border: 1px solid #ddd;
@@ -49,7 +49,7 @@
             font-size: 14px;
             box-sizing: border-box;
         }
-        .form-group input:focus {
+        .form-group input:focus, .form-group textarea:focus {
             border-color: #007bff;
             outline: none;
         }
@@ -90,13 +90,36 @@
         <h2>Register</h2>
         <form method="POST" action="<?php echo site_url('auth/register'); ?>">
             <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required placeholder="Enter your username">
+            </div>
+            <div class="form-group">
+                <label for="full_name">Full Name</label>
+                <input type="text" id="full_name" name="full_name" required placeholder="Enter your full name">
+            </div>
+            <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" required placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="phone_number">Phone Number</label>
+                <input type="text" id="phone_number" name="phone_number" required placeholder="Enter your phone number">
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <textarea id="address" name="address" rows="4" required placeholder="Enter your address"></textarea>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required placeholder="Enter your password">
             </div>
+            <!-- <div class="form-group">
+                <label for="role">Role</label>
+                <select id="role" name="role" required>
+                    <option value="customer">Customer</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div> -->
             <div class="form-group">
                 <button type="submit">Register</button>
             </div>
