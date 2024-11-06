@@ -49,7 +49,7 @@ class Cart_model extends CI_Model
             $book = $this->Book_model->getBookById($book_id);
             if (!empty($book)) {
                 $items[$key] = (array) $item; // Convert stdClass to array
-                $items[$key]['book'] = $book[0];
+                $items[$key]['book'] = $book;
             }
         }
 
