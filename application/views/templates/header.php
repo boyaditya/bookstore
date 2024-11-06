@@ -89,25 +89,31 @@ https://www.tooplate.com/view/2114-pixie
                     </li>
 
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search by title / author / ISBN here..." aria-label="Search" style="width: 300px;">
+                <form class="form-inline my-2 my-lg-0" action="<?= site_url('home/index') ?>" method="get">
+                    <select name="field" class="form-control mr-sm-2">
+                        <option value="title">Title</option>
+                        <option value="author">Author</option>
+                        <option value="isbn">ISBN</option>
+                    </select>
+                    <input class="form-control mr-sm-2" type="text" name="keyword" placeholder="Search by title, author, ISBN..." aria-label="Search" style="width: 300px;">
                     <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
                 </form>
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item <?= ($title_page == 'Cart') ? 'active' : '' ?>">
-                        <a class="nav-link" href="<?= base_url('') ?>cart/">Cart</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Sign In
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
+
+                vbar-nav ml-auto">
+                <li class="nav-item <?= ($title_page == 'Cart') ? 'active' : '' ?>">
+                    <a class="nav-link" href="<?= base_url('') ?>cart/">Cart</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Sign In
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
                 </ul>
 
             </div>
