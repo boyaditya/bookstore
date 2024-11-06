@@ -24,8 +24,8 @@
 <div class="featured container no-gutter">
 
     <div class="row posts">
-        <div id="1" class="item new col-md-4">
-            <?php foreach ($books as $book) { ?>
+        <?php foreach ($books as $book) { ?>
+            <div id="1" class="item new col-md-4">
                 <a href="<?= base_url() ?>books/details/<?= $book['_id']->{'$id'} ?>">
                     <div class="featured-item">
                         <img src="<?= base_url() ?>assets/images/product-01.jpg" alt="">
@@ -35,8 +35,8 @@
                         <h6>Rp <?= number_format($book['price'], 2, ',', '.') ?></h6>
                     </div>
                 </a>
-            <?php   } ?>
-        </div>
+            </div>
+        <?php   } ?>
 
     </div>
 </div>
