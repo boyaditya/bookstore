@@ -101,7 +101,8 @@ class Books extends CI_Controller
             'published_date' => date('Y-m-d'),
             'ISBN' => $this->input->post('ISBN'),
             'pages' => (int)$this->input->post('pages'),
-            'language' => $this->input->post('language')
+            'language' => $this->input->post('language'),
+            'cover_image' => $this->input->post('cover_image')
         ];
 
         // Update the book in the database
