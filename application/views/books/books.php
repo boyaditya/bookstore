@@ -6,7 +6,9 @@
             <div class="col-md-4 col-sm-12">
                 <div class="section-heading">
                     <div class="line-dec"></div>
-                    <h1>Featured Items</h1>
+                    <h1>
+                        <?= isset($is_search) && $is_search ? 'Search Results for "' . htmlspecialchars($search_keyword) . '"' : 'Featured Items' ?>
+                    </h1>
                 </div>
             </div>
             <div class="col-md-8 col-sm-12">
@@ -14,7 +16,7 @@
                     <button class="btn btn-primary" data-filter="*">All Products</button>
                     <button class="btn btn-primary" data-filter=".new">Newest</button>
                     <button class="btn btn-primary" data-filter=".low">Low Price</button>
-                    <button class="btn btn-primary" data-filter=".high">Hight Price</button>
+                    <button class="btn btn-primary" data-filter=".high">High Price</button>
                 </div>
             </div>
         </div>
@@ -22,13 +24,15 @@
 </div>
 
 <div class="featured container no-gutter">
-
     <div class="row posts">
-        <?php foreach ($books as $book) { ?>
-        <div id="1" class="item new col-md-4">
+        <?php if (empty($books)) : ?>
+            <p>No results found for "<?= htmlspecialchars($search_keyword) ?>".</p>
+        <?php else : ?>
+            <?php foreach ($books as $book) { ?>
+            <div id="1" class="item new col-md-4">
                 <a href="<?= base_url() ?>books/details/<?= $book['_id']->{'$id'} ?>">
                     <div class="featured-item">
-                        <img src="<?= base_url() ?>assets/images/product-01.jpg" alt="">
+                    <img src="<?= base_url() ?>assets/images/product-01.jpg" alt="">
                         <h4><?= $book['title'] ?></h4>
                         <p><?= $book['author'] ?></p>
                         <br>
@@ -36,8 +40,8 @@
                     </div>
                 </a>
             </div>
-            <?php   } ?>
-
+            <?php } ?>
+        <?php endif; ?>
     </div>
 </div>
 
@@ -55,4 +59,4 @@
         </div>
     </div>
 </div>
-<!-- Featred Page Ends Here -->
+<!-- Featured Page Ends Here -->

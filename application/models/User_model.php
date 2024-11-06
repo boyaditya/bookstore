@@ -26,9 +26,9 @@ class User_model extends CI_Model {
         return true; // Mengembalikan true jika berhasil
     }
     
-    public function login($email, $password) {
-        // Cari user berdasarkan email
-        $result = $this->mongo_db->where(['email' => $email])->limit(1)->get('users');
+    public function login($username, $password) {
+        // Cari user berdasarkan username
+        $result = $this->mongo_db->where(['username' => $username])->limit(1)->get('users');
         
         if (!empty($result)) {
             // Periksa password

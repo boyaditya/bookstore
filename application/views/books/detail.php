@@ -115,7 +115,7 @@
                         <?php foreach ($booklist as $books): ?>
                             <a href="<?= base_url('books/details/' . $books['_id']->{'$id'}) ?>">  <!-- Link untuk menuju detail buku -->
                                 <div class="featured-item">
-                                    <img src="assets/images/item-01.jpg" alt="Item 1">
+                                    <img src="<?= base_url() ?>assets/images/product-01.jpg" alt="">
                                     <h4><?= $books['title'] ?></h4>
                                     <p><?= $books['author'] ?></p>
                                     <h6>Rp <?= number_format($books['price'], 2, ',', '.') ?></h6>
