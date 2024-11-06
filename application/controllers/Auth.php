@@ -36,11 +36,11 @@ class Auth extends CI_Controller {
     public function login() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Ambil data dari form
-            $email = $this->input->post('email');
+            $username = $this->input->post('username');
             $password = $this->input->post('password');
 
             // Cek kredensial login
-            $user = $this->User_model->login($email, $password);
+            $user = $this->User_model->login($username, $password);
 
             if ($user) {
                 $this->session->set_userdata('user', $user);
