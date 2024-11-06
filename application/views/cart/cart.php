@@ -1,5 +1,3 @@
-
-
 <!-- Page Content -->
 <!-- Single Starts Here -->
 <div class="single-product">
@@ -11,29 +9,29 @@
                     <h1>Cart</h1>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="product-slider">
-                    <div id="slider" class="flexslider">
-                        <ul class="slides">
-                            <li>
-                                <img src="<?= base_url() ?>assets/images/big-01.jpg" />
-                            </li>
-                            <!-- items mirrored twice, total of 12 -->
-                        </ul>
+            <?php
+            $total = 0;
+            foreach ($cart_items as $index => $item) {
+                $subtotal = $item['book']['price'] * $item['quantity'];
+                $total += $subtotal;
+            ?>
+                <div class="col-md-3">
+                    <div class="product-slider">
+                        <div id="slider" class="flexslider">
+                            <ul class="slides">
+                                <li>
+                                    <img src="<?= $item['book']['cover_image'] ?>" alt="<?= $item['book']['title'] ?>" />
+                                </li>
+                                <!-- items mirrored twice, total of 12 -->
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-9">
-                <?php
-                $total = 0;
-                foreach ($cart_items as $index => $item) {
-                    $subtotal = $item['book']['price'] * $item['quantity'];
-                    $total += $subtotal;
-                ?>
+                <div class="col-md-9">
                     <div class="right-content">
                         <h4><?= $item['book']['title'] ?></h4>
                         <h6>Rp <?= number_format($item['book']['price'], 2, ',', '.') ?></h6>
-                        <form action="<?= base_url() ?>cart/delete" method="post">
+                        <form action="<?= base_url() ?>cart/remove" method="post">
                             <input type="hidden" name="book_id" value="<?= $item['book']['_id']->{'$id'} ?>">
                             <label for="quantity-<?= $index ?>">Quantity:</label>
                             <div class="input-group mb-3" style="max-width: 150px;">
@@ -55,7 +53,9 @@
                         </div>
                     </div>
                     <hr>
-                <?php } ?>
+                </div>
+            <?php } ?>
+            <div class="col-md-12">
                 <div class="right-content float-right">
                     <h4>Total: Rp <span id="total-price"><?= number_format($total, 2, ',', '.') ?></span></h4>
                     <button class="btn btn-success mt-3" id="checkout-button">Check Out</button>
@@ -75,6 +75,7 @@
                 quantityInput.value = currentValue - 1;
                 updateSubtotal(<?= $index ?>, <?= $item['book']['price'] ?>);
                 updateTotalPrice();
+                updateQuantityInDB('<?= $item['book']['_id']->{'$id'} ?>', quantityInput.value);
             }
         });
 
@@ -84,11 +85,13 @@
             quantityInput.value = currentValue + 1;
             updateSubtotal(<?= $index ?>, <?= $item['book']['price'] ?>);
             updateTotalPrice();
+            updateQuantityInDB('<?= $item['book']['_id']->{'$id'} ?>', quantityInput.value);
         });
 
         document.getElementById('quantity-<?= $index ?>').addEventListener('input', function() {
             updateSubtotal(<?= $index ?>, <?= $item['book']['price'] ?>);
             updateTotalPrice();
+            updateQuantityInDB('<?= $item['book']['_id']->{'$id'} ?>', this.value);
         });
 
         function updateSubtotal(index, price) {
@@ -112,4 +115,16 @@
             maximumFractionDigits: 2
         });
     }
+
+    function updateQuantityInDB(book_id, quantity) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '<?= base_url() ?>cart/update_quantity', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send('book_id=' + book_id + '&quantity=' + quantity);
+    }
+
+    document.getElementById('checkout-button').addEventListener('click', function() {
+        alert('Proceed to checkout');
+        // You can add your checkout logic here
+    });
 </script>

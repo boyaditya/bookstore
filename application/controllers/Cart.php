@@ -39,10 +39,20 @@ class Cart extends CI_Controller
         $user_id = "672969deee284ad03e964034";
         $book_id = $this->input->post('book_id');
 
-        var_dump($book_id);
+        // var_dump($book_id);
         // die();
 
         $this->Cart_model->removeFromCart($user_id, $book_id);
         redirect('cart');
+    }
+
+
+    public function update_quantity()
+    {
+        $user_id = "672969deee284ad03e964034";
+        $book_id = $this->input->post('book_id');
+        $quantity = $this->input->post('quantity');
+
+        $this->Cart_model->updateQuantity($user_id, $book_id, $quantity);
     }
 }
