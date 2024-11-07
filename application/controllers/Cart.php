@@ -12,20 +12,29 @@ class Cart extends CI_Controller
 
     public function index($id = null)
     {
-        $data['title_page'] = 'Cart';
-        $data['cart'] = $this->Cart_model->getCartsByUserId("672969deee284ad03e964034");
-
-        // Ambil item dari keranjang
-        $cartItems = $this->Cart_model->getCartItems($data['cart'][0]['_id']->{'$id'});
-
-        // Tambahkan informasi gambar pada setiap item di keranjang
-        foreach ($cartItems as &$item) {
-            // Dapatkan data buku dari database menggunakan Book_model
-            $bookData = $this->Book_model->getBookById($item['book_id']);
-            $item['book']['cover_image'] = $bookData['cover_image']; // Menambahkan cover_image ke dalam setiap item
+        // Periksa apakah pengguna sudah login
+        if (!$this->session->userdata('user')) {
+            // Jika belum login, arahkan ke halaman login
+            redirect('auth/login');
         }
-        
-        $data['cart_items'] = $cartItems;
+
+        $data['title_page'] = 'Cart';
+        $data['user'] = $this->User_model->getUserBySession();
+        $data['cart'] = $this->Cart_model->getCartsByUserId($data['user']['_id']->{'$id'});
+
+        if (!empty($data['cart'])) {
+            // Ambil item dari keranjang
+            $cartItems = $this->Cart_model->getCartItems($data['cart'][0]['_id']->{'$id'});
+    
+            // Tambahkan informasi gambar pada setiap item di keranjang
+            foreach ($cartItems as &$item) {
+                // Dapatkan data buku dari database menggunakan Book_model
+                $bookData = $this->Book_model->getBookById($item['book_id']);
+                $item['book']['cover_image'] = $bookData['cover_image']; // Menambahkan cover_image ke dalam setiap item
+            }
+            
+            $data['cart_items'] = $cartItems;
+        }
 
         $this->load->view('templates/header', $data);
         $this->load->view('cart/cart', $data);
@@ -35,7 +44,7 @@ class Cart extends CI_Controller
 
     public function add()
     {
-        $user_id = "672969deee284ad03e964034";
+        $user_id = $this->session->userdata('user')['_id']->{'$id'};
         $book_id = $this->input->post('book_id');
         $quantity = $this->input->post('quantity');
 
@@ -45,7 +54,7 @@ class Cart extends CI_Controller
 
     public function delete()
     {
-        $user_id = "672969deee284ad03e964034";
+        $user_id = $this->session->userdata('user')['_id']->{'$id'};
         $book_id = $this->input->post('book_id');
 
         // var_dump($book_id);
@@ -58,7 +67,7 @@ class Cart extends CI_Controller
 
     public function update_quantity()
     {
-        $user_id = "672969deee284ad03e964034";
+        $user_id = $this->session->userdata('user')['_id']->{'$id'};
         $book_id = $this->input->post('book_id');
         $quantity = $this->input->post('quantity');
 

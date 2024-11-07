@@ -21,11 +21,16 @@ class Cart_model extends CI_Model
     {
         $this->load->library('mongo_db');
         $data = $this->mongo_db->where(['user_id' => new MongoDB\BSON\ObjectId($user_id)])->get('carts');
+        $data = !empty($data) ? $data : [];
         return $data;
     }
 
     public function getCartItems($cart_id)
-    {
+    {   
+        if (empty($cart_id)) {
+            return [];
+        }
+
         $this->load->library('mongo_db');
         $cart = $this->mongo_db->where(['_id' => new MongoDB\BSON\ObjectId($cart_id)])->get('carts');
         $items = !empty($cart) ? $cart[0]['items'] : [];

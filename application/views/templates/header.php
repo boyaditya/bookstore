@@ -64,17 +64,26 @@ https://www.tooplate.com/view/2114-pixie
                     <li class="nav-item <?= ($title_page == 'Cart') ? 'active' : '' ?>">
                         <a class="nav-link" href="<?= base_url('') ?>cart/">Cart</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Sign In
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="<?= site_url('auth/login') ?>">Login</a>
-                        <!-- <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a> -->
-                        </div>
-                    </li>
+                    <?php if ($this->session->userdata('user')): ?>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Account
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="<?= site_url('auth/logout') ?>">Logout</a>
+                            </div>
+                        </li>
+                    <?php else: ?>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Sign In
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="<?= site_url('auth/login') ?>">Login</a>
+                                <a class="dropdown-item" href="<?= site_url('auth/register') ?>">Register</a>
+                            </div>
+                        </li>
+                    <?php endif; ?>
                 </ul>
 
             </div>
