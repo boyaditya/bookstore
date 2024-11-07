@@ -131,8 +131,27 @@
 
     <?php if (!empty($cart_items)) { ?>
         document.getElementById('checkout-button').addEventListener('click', function() {
-            alert('Proceed to checkout');
+        // Konfirmasi checkout
+        var confirmCheckout = confirm("Are you sure you want to proceed with the checkout?");
+        if (confirmCheckout) {
+            // Data cart_items yang berisi item yang dipilih
+            var cartItems = <?= json_encode($cart_items); ?>;
+            
+            // Kirim data ke server untuk mengurangi stok
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '<?= base_url() ?>books/updateStock', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    alert('Checkout successful! Stock updated.');
+                    window.location.href = '<?= base_url() ?>index.php';
+                }
+            };
             window.location.href = '<?= base_url() ?>index.php';
-        });
-    <?php } ?>
+            xhr.send(JSON.stringify({ cart_items: cartItems }));
+        }
+    });
+
+<?php } ?>
+
 </script>
