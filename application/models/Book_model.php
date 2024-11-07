@@ -14,6 +14,11 @@ class Book_model extends CI_Model
         return $this->mongo_db->get('books');
     }
 
+    public function getBooksHome()
+    {
+        return $this->mongo_db->limit(8)->get('books');
+    }
+
     public function getBookById($id)
     {
         $this->load->library('mongo_db');

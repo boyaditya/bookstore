@@ -62,7 +62,7 @@
                     <h4>Total: Rp <span id="total-price"><?= number_format($total, 2, ',', '.') ?></span></h4>
                     <!-- Tampilkan tombol checkout hanya jika ada item -->
                     <?php if (!empty($cart_items)) { ?>
-                        <button class="btn btn-success mt-3" id="checkout-button">Check Out</button>
+                        <a href="<?= base_url() ?>checkout/" class="btn btn-success mt-3" id="checkout-button" >Check Out</a>
                     <?php } ?>
                 </div>
             </div>
