@@ -38,23 +38,23 @@
 
     <div class="row posts">
         
-        <?php if (empty($books)) : ?>
-            <p>No results found for "<?= htmlspecialchars($search_keyword) ?>".</p>
-        <?php else : ?>
-            <?php foreach ($books as $book) { ?>
-            <div id="1" class="item new col-md-4">
-                <a href="<?= base_url() ?>books/details/<?= $book['_id']->{'$id'} ?>">
-                    <div class="featured-item">
-                    <img src="<?= base_url() ?>assets/images/product-01.jpg" alt="">
-                        <h4><?= $book['title'] ?></h4>
-                        <p><?= $book['author'] ?></p>
-                        <br>
-                        <h6>Rp <?= number_format($book['price'], 2, ',', '.') ?></h6>
-                    </div>
-                </a>
-            </div>
-            <?php } ?>
-        <?php endif; ?>
+    <?php if (empty($books)) : ?>
+                <p>No results found for "<?= htmlspecialchars($search_keyword) ?>".</p>
+            <?php else : ?>
+                <?php foreach ($books as $book) { ?>
+                <div id="1" class="item new col-md-4">
+                    <a href="<?= base_url() ?>books/details/<?= $book['_id']->{'$id'} ?>">
+                        <div class="featured-item">
+                        <img src="<?= $book['cover_image'] ?>" alt="<?= $book['title'] ?>" class="img-fluid" />
+                            <h4><?= $book['title'] ?></h4>
+                            <p><?= $book['author'] ?></p>
+                            <br>
+                            <h6>Rp <?= number_format($book['price'], 2, ',', '.') ?></h6>
+                        </div>
+                    </a>
+                </div>
+                <?php } ?>
+            <?php endif; ?>
     </div>
 </div>
 
