@@ -11,22 +11,24 @@ class Books extends CI_Controller
 
     public function index()
     {
-        // Ambil parameter field dan keyword dari URL (GET request)
+        // Ambil parameter sorting dan pencarian dari URL
         $field = $this->input->get('field'); // Field pencarian: 'title', 'author', atau 'isbn'
         $keyword = $this->input->get('keyword'); // Keyword pencarian
+        $sort_by = $this->input->get('sort_by'); // Parameter sorting: 'title_asc', 'title_desc', 'price_asc', 'price_desc'
 
         // Jika ada field dan keyword, lakukan pencarian
         if ($field && $keyword) {
-            $data['books'] = $this->Book_model->searchBooks($field, $keyword);
+            $data['books'] = $this->Book_model->searchBooks($field, $keyword, $sort_by);
             $data['is_search'] = true; // Tandai bahwa ini adalah hasil pencarian
             $data['search_keyword'] = $keyword; // Simpan kata kunci pencarian untuk ditampilkan
         } else {
-            // Jika tidak ada parameter pencarian, tampilkan semua buku
-            $data['books'] = $this->Book_model->getBooks();
+            // Jika tidak ada parameter pencarian, tampilkan semua buku dengan atau tanpa sorting
+            $data['books'] = $this->Book_model->getBooks($sort_by);
             $data['is_search'] = false; // Tandai bahwa ini bukan hasil pencarian
         }
 
         $data['title_page'] = 'Books';
+        $data['sort_by'] = $sort_by; // Untuk mengingat pilihan sorting di dropdown
 
         // Load view utama index.php
         $this->load->view('templates/header', $data);

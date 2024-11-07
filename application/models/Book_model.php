@@ -9,8 +9,21 @@ class Book_model extends CI_Model
         $this->load->library('mongo_db'); // Pastikan MongoDB sudah terhubung
     }
 
-    public function getBooks()
+    public function getBooks($sort_by = null)
     {
+        // Tambahkan logika sorting berdasarkan parameter
+        if ($sort_by) {
+            if ($sort_by == 'price_asc') {
+                $this->mongo_db->order_by(['price' => 'ASC']);
+            } elseif ($sort_by == 'price_desc') {
+                $this->mongo_db->order_by(['price' => 'DESC']);
+            } elseif ($sort_by == 'title_asc') {
+                $this->mongo_db->order_by(['title' => 'ASC']);
+            } elseif ($sort_by == 'title_desc') {
+                $this->mongo_db->order_by(['title' => 'DESC']);
+            }
+        }
+
         return $this->mongo_db->get('books');
     }
 
@@ -54,12 +67,27 @@ class Book_model extends CI_Model
         return $data[0];
     }
 
-    public function searchBooks($field, $keyword)
+    public function searchBooks($field, $keyword, $sort_by = null)
     {
         // Pastikan keyword dicari secara case-insensitive dengan ekspresi reguler
         $regex = new MongoDB\BSON\Regex($keyword, 'i');
         $this->mongo_db->where([$field => $regex]);
+
+        // Tambahkan logika sorting berdasarkan parameter
+        if ($sort_by) {
+            if ($sort_by == 'price_asc') {
+                $this->mongo_db->order_by(['price' => 'ASC']);
+            } elseif ($sort_by == 'price_desc') {
+                $this->mongo_db->order_by(['price' => 'DESC']);
+            } elseif ($sort_by == 'title_asc') {
+                $this->mongo_db->order_by(['title' => 'ASC']);
+            } elseif ($sort_by == 'title_desc') {
+                $this->mongo_db->order_by(['title' => 'DESC']);
+            }
+        }
+
         return $this->mongo_db->get('books');
     }
 
+    
 }

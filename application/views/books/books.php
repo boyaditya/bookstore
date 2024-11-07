@@ -23,8 +23,21 @@
     </div>
 </div>
 
+
 <div class="featured container no-gutter">
+<form action="<?= site_url('books/index') ?>" method="get" class="form-inline my-2 my-lg-0">
+    <!-- Dropdown untuk sorting -->
+    <select name="sort_by" class="form-control mr-sm-2" onchange="this.form.submit()">
+        <option value="">Sort By</option>
+        <option value="title_asc" <?= isset($_GET['sort_by']) && $_GET['sort_by'] == 'title_asc' ? 'selected' : '' ?>>Title A-Z</option>
+        <option value="title_desc" <?= isset($_GET['sort_by']) && $_GET['sort_by'] == 'title_desc' ? 'selected' : '' ?>>Title Z-A</option>
+        <option value="price_asc" <?= isset($_GET['sort_by']) && $_GET['sort_by'] == 'price_asc' ? 'selected' : '' ?>>Price: Low to High</option>
+        <option value="price_desc" <?= isset($_GET['sort_by']) && $_GET['sort_by'] == 'price_desc' ? 'selected' : '' ?>>Price: High to Low</option>
+    </select>
+</form>
+
     <div class="row posts">
+        
         <?php if (empty($books)) : ?>
             <p>No results found for "<?= htmlspecialchars($search_keyword) ?>".</p>
         <?php else : ?>
