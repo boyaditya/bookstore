@@ -103,7 +103,8 @@ class Books extends CI_Controller
             'published_date' => date('Y-m-d'),
             'ISBN' => $this->input->post('ISBN'),
             'pages' => (int)$this->input->post('pages'),
-            'language' => $this->input->post('language')
+            'language' => $this->input->post('language'),
+            'cover_image' => $this->input->post('cover_image')
         ];
 
         // Update the book in the database
@@ -144,4 +145,77 @@ class Books extends CI_Controller
         $this->load->view('books/books', $data);
         $this->load->view('templates/footer');
     }
+
+    public function updateStock() {
+            try {
+                // Ambil raw input dan decode
+                $input = json_decode($this->input->raw_input_stream, true);
+                
+                // Pastikan kita mengakses cart_items dari input yang dikirim
+                $cart_items = isset($input['cart_items']) ? $input['cart_items'] : [];
+                
+                // Log data yang diterima untuk debugging
+                error_log("Received cart items: " . print_r($cart_items, true));
+                
+                if (empty($cart_items)) {
+                    throw new Exception('No cart items received');
+                }
+                
+                // Looping setiap item dalam keranjang
+                foreach ($cart_items as $item) {
+                    // Pastikan semua data yang diperlukan ada
+                    if (!isset($item['book']) || !isset($item['book']['_id']) || !isset($item['quantity'])) {
+                        throw new Exception('Invalid cart item format');
+                    }
+                    
+                    // Ambil book_id - handle both string and object formats
+                    $book_id = is_array($item['book']['_id']) ? $item['book']['_id']['$id'] : $item['book']['_id'];
+                    $quantity = intval($item['quantity']);
+                    
+                    if ($quantity <= 0) {
+                        continue; // Skip if quantity is invalid
+                    }
+                    
+                    // Cari buku berdasarkan ID
+                    $this->load->model('Book_model');
+                    $book = $this->Book_model->getBookById($book_id);
+                    
+                    if (!$book) {
+                        throw new Exception("Book not found with ID: $book_id");
+                    }
+                    
+                    // Cek stok mencukupi
+                    if ($book['stock'] < $quantity) {
+                        throw new Exception("Insufficient stock for book: {$book['title']}");
+                    }
+                    
+                    // Update stok
+                    $new_stock = $book['stock'] - $quantity;
+                    $result = $this->Book_model->updateBookStock($book_id, $new_stock);
+                    
+                    if (!$result) {
+                        throw new Exception("Failed to update stock for book: {$book['title']}");
+                    }
+                    
+                    error_log("Successfully updated stock for book $book_id from {$book['stock']} to $new_stock");
+                }
+                
+                // Kirim response sukses
+                $response = ['status' => 'success', 'message' => 'Stock updated successfully'];
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_output(json_encode($response));
+                    
+            } catch (Exception $e) {
+                // Log error
+                error_log("Error in updateStock: " . $e->getMessage());
+                
+                // Kirim response error
+                $response = ['status' => 'error', 'message' => $e->getMessage()];
+                $this->output
+                    ->set_status_header(500)
+                    ->set_content_type('application/json')
+                    ->set_output(json_encode($response));
+            }
+        }
 }

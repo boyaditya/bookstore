@@ -21,11 +21,16 @@ class Cart_model extends CI_Model
     {
         $this->load->library('mongo_db');
         $data = $this->mongo_db->where(['user_id' => new MongoDB\BSON\ObjectId($user_id)])->get('carts');
+        $data = !empty($data) ? $data : [];
         return $data;
     }
 
     public function getCartItems($cart_id)
-    {
+    {   
+        if (empty($cart_id)) {
+            return [];
+        }
+
         $this->load->library('mongo_db');
         $cart = $this->mongo_db->where(['_id' => new MongoDB\BSON\ObjectId($cart_id)])->get('carts');
         $items = !empty($cart) ? $cart[0]['items'] : [];
@@ -114,5 +119,27 @@ class Cart_model extends CI_Model
         }
     }
 
-    
+    public function updateQuantity($user_id, $book_id, $quantity)
+    {
+        $this->load->library('mongo_db');
+        $cart = $this->mongo_db->where(['user_id' => new MongoDB\BSON\ObjectId($user_id)])->get('carts');
+
+        if (!empty($cart)) {
+            $cart_id = $cart[0]['_id']->{'$id'};
+            $items = $this->getCartItems($cart_id);
+
+            // Update the quantity of the item
+            foreach ($items as &$item) {
+                if ((string) $item['book_id'] === $book_id) {
+                    $item['quantity'] = (int) $quantity;
+                    break;
+                }
+            }
+
+            // Update the cart in the database
+            $this->mongo_db->where(['_id' => new MongoDB\BSON\ObjectId($cart_id)])
+                ->set(['items' => $items, 'updated_at' => new MongoDB\BSON\UTCDateTime()])
+                ->update('carts');
+        }
+    }
 }

@@ -7,49 +7,29 @@
                     <div class="section-heading">
                         <div class="line-dec"></div>
                         <h1>Single Product</h1>
-                            <div class="d-flex align-items-center">
-                                <div class="main-button" style="margin-right: 30px;">
-                                    <a href="<?= base_url('books/edit/'.$book['_id']->{'$id'}) ?>">Edit Book</a>
-                                </div>
-                                <div>
-                                    <a class="btn btn-danger" href="<?= base_url('books/delete/'.$book['_id']->{'$id'}) ?>" 
+                        <div class="d-flex align-items-center">
+                            <div class="main-button" style="margin-right: 30px;">
+                                <a href="<?= base_url('books/edit/' . $book['_id']->{'$id'}) ?>">Edit Book</a>
+                            </div>
+                            <div>
+                                <a class="btn btn-danger" href="<?= base_url('books/delete/' . $book['_id']->{'$id'}) ?>"
                                     onclick="return confirm('Are you sure you want to delete this?');" role="button">Delete Book</a>
-                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
                 <div class="col-md-6">
                     <div class="product-slider">
                         <div id="slider" class="flexslider">
                             <ul class="slides">
-                                <li>
-                                    <img src="<?= base_url() ?>assets/images/big-01.jpg" />
-                                </li>
-                                <li>
-                                    <img src="<?= base_url() ?>assets/images/big-02.jpg" />
-                                </li>
-                                <li>
-                                    <img src="<?= base_url() ?>assets/images/big-03.jpg" />
-                                </li>
-                                <li>
-                                    <img src="<?= base_url() ?>assets/images/big-04.jpg" />
-                                </li>
+                                <img src="<?= $book['cover_image'] ?>" alt="<?= $book['title'] ?>" class="img-fluid" />
                                 <!-- items mirrored twice, total of 12 -->
                             </ul>
                         </div>
                         <div id="carousel" class="flexslider">
                             <ul class="slides">
                                 <li>
-                                    <img src="<?= base_url() ?>assets/images/thumb-01.jpg" />
-                                </li>
-                                <li>
-                                    <img src="<?= base_url() ?>assets/images/thumb-02.jpg" />
-                                </li>
-                                <li>
-                                    <img src="<?= base_url() ?>assets/images/thumb-03.jpg" />
-                                </li>
-                                <li>
-                                    <img src="<?= base_url() ?>assets/images/thumb-04.jpg" />
+                                    <img src="<?= $book['cover_image'] ?>" alt="<?= $book['title'] ?>" class="img-fluid" />
                                 </li>
                                 <!-- items mirrored twice, total of 12 -->
                             </ul>
@@ -70,7 +50,11 @@
                                 onBlur="if(this.value == '') { this.value = '1';}"
                                 value="1">
                             <input type="hidden" name="book_id" value="<?= $book['_id']->{'$id'} ?>">
-                            <input type="submit" class="button" value="Order Now!">
+                            <?php if ($this->session->userdata('user')): ?>
+                                <input type="submit" class="button" value="Add to Cart">
+                            <?php else: ?>
+                                <a href="<?= site_url('auth/login') ?>" class="button">Login to Add to Cart</a>
+                            <?php endif; ?>
                         </form>
                         <div class="down-content">
                             <div class="categories">
@@ -111,20 +95,20 @@
                     </div>
                 </div>
                 <class="col-md-12">
-                    <div class="owl-carousel owl-theme" style="margin-right: 1000px;>
+                    <div class="owl-carousel owl-theme";>
                         <?php foreach ($booklist as $books): ?>
-                            <a href="<?= base_url('books/details/' . $books['_id']->{'$id'}) ?>">  <!-- Link untuk menuju detail buku -->
-                                <div class="featured-item">
-                                    <img src="<?= base_url() ?>assets/images/product-01.jpg" alt="">
-                                    <h4><?= $books['title'] ?></h4>
-                                    <p><?= $books['author'] ?></p>
-                                    <h6>Rp <?= number_format($books['price'], 2, ',', '.') ?></h6>
-                                </div>
-                            </a>
-                        <?php endforeach; ?>
+                            <a href=" <?= base_url('books/details/' . $books['_id']->{'$id'}) ?>">
+                        <div class="featured-item">
+                            <img src="<?= $books['cover_image'] ?>" alt="<?= $books['title'] ?>" class="img-fluid" />
+                            <h4><?= $books['title'] ?></h4>
+                            <p><?= $books['author'] ?></p>
+                            <h6>Rp <?= number_format($books['price'], 2, ',', '.') ?></h6>
+                        </div>
+                        </a>
+                    <?php endforeach; ?>
                     </div>
-                </div>
             </div>
         </div>
+    </div>
     </div>
     <!-- Similar Ends Here -->

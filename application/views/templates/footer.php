@@ -6,8 +6,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="logo">
-                    <img src="<?= base_url() ?>assets/images/header-logo.png" alt="">
+                    <h3>Berbuku.com</h3>   
                 </div>
+                <br>
             </div>
             <div class="col-md-12">
                 <div class="footer-menu">

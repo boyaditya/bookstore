@@ -52,6 +52,13 @@ class Book_model extends CI_Model
             ->update('books');
     }
 
+    public function updateBookStock($book_id, $new_stock) {
+        $this->load->library('mongo_db');
+        $this->mongo_db->where(['_id' => new MongoDB\BSON\ObjectId($book_id)])
+            ->set(['stock' => $new_stock])
+            ->update('books');
+    }
+
 
     // Fungsi Delete Book
     public function deleteBook($id)

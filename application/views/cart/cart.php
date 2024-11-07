@@ -1,35 +1,33 @@
-
-
 <!-- Page Content -->
-<!-- Single Starts Here -->
 <div class="single-product">
     <div class="container">
-        <div class="row">
+        <div class="row" id="cart-items">
             <div class="col-md-12">
                 <div class="section-heading">
                     <div class="line-dec"></div>
                     <h1>Cart</h1>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="product-slider">
-                    <div id="slider" class="flexslider">
-                        <ul class="slides">
-                            <li>
-                                <img src="<?= base_url() ?>assets/images/big-01.jpg" />
-                            </li>
-                            <!-- items mirrored twice, total of 12 -->
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-9">
-                <?php
-                $total = 0;
+            <?php
+            $total = 0;
+            if (!empty($cart_items)) { // Jika keranjang tidak kosong
                 foreach ($cart_items as $index => $item) {
                     $subtotal = $item['book']['price'] * $item['quantity'];
                     $total += $subtotal;
-                ?>
+            ?>
+                <!-- Item dalam Keranjang -->
+                <div class="col-md-3">
+                    <div class="product-slider">
+                        <div id="slider" class="flexslider">
+                            <ul class="slides">
+                                <!-- Menampilkan cover_image -->
+                                <img src="<?= $item['book']['cover_image'] ?>" alt="<?= $item['book']['title'] ?>" class="img-fluid" />
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
                     <div class="right-content">
                         <h4><?= $item['book']['title'] ?></h4>
                         <h6>Rp <?= number_format($item['book']['price'], 2, ',', '.') ?></h6>
@@ -41,8 +39,6 @@
                                     <button class="btn btn-outline-secondary" type="button" id="button-minus-<?= $index ?>">-</button>
                                 </div>
                                 <input name="quantity" type="number" class="form-control quantity-text" id="quantity-<?= $index ?>"
-                                    onfocus="if(this.value == '1') { this.value = ''; }"
-                                    onBlur="if(this.value == '') { this.value = '1';}"
                                     value="<?= $item['quantity'] ?>" min="1">
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary" type="button" id="button-plus-<?= $index ?>">+</button>
@@ -55,10 +51,19 @@
                         </div>
                     </div>
                     <hr>
-                <?php } ?>
+                </div>
+            <?php 
+                }
+            } else { 
+                echo "<div class='col-md-12'><p>The cart is empty</p></div>";
+            } ?>
+            <div class="col-md-12">
                 <div class="right-content float-right">
                     <h4>Total: Rp <span id="total-price"><?= number_format($total, 2, ',', '.') ?></span></h4>
-                    <button class="btn btn-success mt-3" id="checkout-button">Check Out</button>
+                    <!-- Tampilkan tombol checkout hanya jika ada item -->
+                    <?php if (!empty($cart_items)) { ?>
+                        <button class="btn btn-success mt-3" id="checkout-button">Check Out</button>
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -67,6 +72,7 @@
 <!-- Single Page Ends Here -->
 
 <script>
+    
     <?php foreach ($cart_items as $index => $item) { ?>
         document.getElementById('button-minus-<?= $index ?>').addEventListener('click', function() {
             var quantityInput = document.getElementById('quantity-<?= $index ?>');
@@ -75,6 +81,7 @@
                 quantityInput.value = currentValue - 1;
                 updateSubtotal(<?= $index ?>, <?= $item['book']['price'] ?>);
                 updateTotalPrice();
+                updateQuantityInDB('<?= $item['book']['_id']->{'$id'} ?>', quantityInput.value);
             }
         });
 
@@ -84,11 +91,13 @@
             quantityInput.value = currentValue + 1;
             updateSubtotal(<?= $index ?>, <?= $item['book']['price'] ?>);
             updateTotalPrice();
+            updateQuantityInDB('<?= $item['book']['_id']->{'$id'} ?>', quantityInput.value);
         });
 
         document.getElementById('quantity-<?= $index ?>').addEventListener('input', function() {
             updateSubtotal(<?= $index ?>, <?= $item['book']['price'] ?>);
             updateTotalPrice();
+            updateQuantityInDB('<?= $item['book']['_id']->{'$id'} ?>', this.value);
         });
 
         function updateSubtotal(index, price) {
@@ -112,4 +121,37 @@
             maximumFractionDigits: 2
         });
     }
+
+    function updateQuantityInDB(book_id, quantity) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '<?= base_url() ?>cart/update_quantity', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send('book_id=' + book_id + '&quantity=' + quantity);
+    }
+
+    <?php if (!empty($cart_items)) { ?>
+        document.getElementById('checkout-button').addEventListener('click', function() {
+        // Konfirmasi checkout
+        var confirmCheckout = confirm("Are you sure you want to proceed with the checkout?");
+        if (confirmCheckout) {
+            // Data cart_items yang berisi item yang dipilih
+            var cartItems = <?= json_encode($cart_items); ?>;
+            
+            // Kirim data ke server untuk mengurangi stok
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '<?= base_url() ?>books/updateStock', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    alert('Checkout successful! Stock updated.');
+                    window.location.href = '<?= base_url() ?>index.php';
+                }
+            };
+            window.location.href = '<?= base_url() ?>index.php';
+            xhr.send(JSON.stringify({ cart_items: cartItems }));
+        }
+    });
+
+<?php } ?>
+
 </script>
