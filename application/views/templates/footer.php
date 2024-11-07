@@ -16,7 +16,6 @@
                         <li><a href="#">Home</a></li>
                         <li><a href="#">Help</a></li>
                         <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">How It Works ?</a></li>
                         <li><a href="#">Contact Us</a></li>
                     </ul>
                 </div>
@@ -42,7 +41,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="copyright-text">
-                    <p>Copyright &copy; 2019 Company Name
+                    <p>Copyright &copy; 2024 Berbuku.com
 
                         - Design: <a rel="nofollow" href="https://www.facebook.com/tooplate">Tooplate</a></p>
                 </div>
