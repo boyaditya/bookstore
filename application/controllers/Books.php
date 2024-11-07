@@ -29,6 +29,7 @@ class Books extends CI_Controller
 
         $data['title_page'] = 'Books';
         $data['sort_by'] = $sort_by; // Untuk mengingat pilihan sorting di dropdown
+        
 
         // Load view utama index.php
         $this->load->view('templates/header', $data);
@@ -126,6 +127,7 @@ class Books extends CI_Controller
         // Ambil parameter field dan keyword dari URL (GET request)
         $field = $this->input->get('field'); // Field pencarian: 'title', 'author', atau 'isbn'
         $keyword = $this->input->get('keyword'); // Keyword pencarian
+        
 
         // Jika ada parameter pencarian
         if ($field && $keyword) {
