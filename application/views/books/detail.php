@@ -95,7 +95,7 @@
                     </div>
                 </div>
                 <class="col-md-12">
-                    <div class="owl-carousel owl-theme" style="margin-right: 1000px;>
+                    <div class="owl-carousel owl-theme";>
                         <?php foreach ($booklist as $books): ?>
                             <a href=" <?= base_url('books/details/' . $books['_id']->{'$id'}) ?>">
                         <div class="featured-item">
