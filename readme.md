@@ -104,19 +104,27 @@ bookstore/
 ## 📷 Screenshots
 
 1. **Home Page**
-   
+   ![Screenshot 2025-01-16 190704](https://github.com/user-attachments/assets/ddcb6ff8-a6fe-4267-9c63-2de0f57e6c46)
+	![image](https://github.com/user-attachments/assets/fce41b2b-6c3a-4874-8c70-3784ade1da76)
+
 
 2. **Book List**
-   ![Book List](screenshots/book_list.png)
+   ![image](https://github.com/user-attachments/assets/d8d63b41-b383-4301-9896-87216057d75b)
+
 
 3. **Book Details**
-   ![Book Details](screenshots/book_details.png)
+   ![image](https://github.com/user-attachments/assets/4562e647-5c50-4786-97e7-b021fb4f16c6)
+
 
 4. **Shopping Cart**
-   ![Shopping Cart](screenshots/shopping_cart.png)
+   ![image](https://github.com/user-attachments/assets/c4e20c61-afb8-410c-99eb-5b9432b527aa)
 
-5. **Checkout**
-   ![Checkout](screenshots/checkout.png)
+
+5. **Log In & Register**
+   ![image](https://github.com/user-attachments/assets/1231bdbc-8c34-461b-89db-71afa6e72f6e)
+	![image](https://github.com/user-attachments/assets/f7c26110-5499-4cdc-a437-46263ed3deac)
+
+
 
 ---
 
