@@ -1,71 +1,141 @@
-###################
-What is CodeIgniter
-###################
+# 📚 Bookstore Application
 
-CodeIgniter is an Application Development Framework - a toolkit - for people
-who build web sites using PHP. Its goal is to enable you to develop projects
-much faster than you could if you were writing code from scratch, by providing
-a rich set of libraries for commonly needed tasks, as well as a simple
-interface and logical structure to access these libraries. CodeIgniter lets
-you creatively focus on your project by minimizing the amount of code needed
-for a given task.
+## 📖 Description
+Bookstore is a web-based application that allows users to explore, search, and purchase books online. The application includes features such as book CRUD, book search, detailed book views, login, register, shopping cart, and checkout process.
 
-*******************
-Release Information
-*******************
+This application is built using the CodeIgniter 3 framework and NoSQL MongoDB database.
 
-This repo contains in-development code for future releases. To download the
-latest stable release please visit the `CodeIgniter Downloads
-<https://codeigniter.com/download>`_ page.
+---
 
-**************************
-Changelog and New Features
-**************************
+## ✨ Key Features
 
-You can find a list of all changes for each release in the `user
-guide change log <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/changelog.rst>`_.
+1. **Book Management (CRUD)**
+   - Add new books
+   - View book list
+   - Update book information
+   - Delete books
 
-*******************
-Server Requirements
-*******************
+2. **Book Search**
+   - Search books by title, author, or ISBN
 
-PHP version 5.6 or newer is recommended.
+3. **Book Details**
+   - View complete book information, including description, price, and stock
 
-It should work on 5.3.7 as well, but we strongly advise you NOT to run
-such old versions of PHP, because of potential security and performance
-issues, as well as missing features.
+4. **User Authentication**
+   - Login for registered users
+   - Register new users
 
-************
-Installation
-************
+5. **Shopping Cart**
+   - Add books to the shopping cart
+   - View and edit cart contents
 
-Please see the `installation section <https://codeigniter.com/userguide3/installation/index.html>`_
-of the CodeIgniter User Guide.
+6. **Checkout**
+   - Complete the purchase process
+   - Users must be logged in to proceed with checkout
 
-*******
-License
-*******
+---
 
-Please see the `license
-agreement <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/license.rst>`_.
+## 🛠️ Technologies Used
 
-*********
-Resources
-*********
+- **Framework:** CodeIgniter 3
+- **Database:** MongoDB
+- **Programming Languages:** PHP, JavaScript
+- **Additional Libraries:**
+  - Bootstrap for user interface design
+  - jQuery for interactivity
 
--  `User Guide <https://codeigniter.com/docs>`_
--  `Contributing Guide <https://github.com/bcit-ci/CodeIgniter/blob/develop/contributing.md>`_
--  `Language File Translations <https://github.com/bcit-ci/codeigniter3-translations>`_
--  `Community Forums <http://forum.codeigniter.com/>`_
--  `Community Wiki <https://github.com/bcit-ci/CodeIgniter/wiki>`_
--  `Community Slack Channel <https://codeigniterchat.slack.com>`_
+---
 
-Report security issues to our `Security Panel <mailto:security@codeigniter.com>`_
-or via our `page on HackerOne <https://hackerone.com/codeigniter>`_, thank you.
+## 🚀 Installation
 
-***************
-Acknowledgement
-***************
+Follow these steps to run the application locally:
 
-The CodeIgniter team would like to thank EllisLab, all the
-contributors to the CodeIgniter project and you, the CodeIgniter user.
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/arulzkash/bookstore.git
+   ```
+
+2. Navigate to the project directory:
+   ```bash
+   cd bookstore
+   ```
+
+3. Configure MongoDB database:
+   - Ensure MongoDB is installed and running on your system.
+   - Set up the database connection in the `application/config/mongo_db.php` file.
+
+4. Set up the base URL in `application/config/config.php`:
+   ```php
+   $config['base_url'] = 'http://localhost/bookstore/';
+   ```
+
+5. Run a local server:
+   - If using XAMPP or WAMP, move the project folder to the `htdocs` directory.
+   - Access the application via browser at `http://localhost/bookstore`.
+
+---
+
+## 🛒 Usage
+
+1. **Users:**
+   - Register a new account.
+   - Log in to add books to the cart and proceed to checkout.
+   - Only logged-in users can complete the checkout process.
+
+---
+
+## 📂 Project Structure
+
+```
+bookstore/
+├── application/
+│   ├── config/         # Application configuration
+│   ├── controllers/    # Main controllers for the application
+│   ├── models/         # Models for CRUD and database interactions
+│   ├── views/          # Views for the user interface
+│
+├── assets/             # CSS, JS, and image files
+├── system/             # CodeIgniter core files
+├── index.php           # Application entry point
+```
+
+---
+
+## 📷 Screenshots
+
+1. **Home Page**
+   
+
+2. **Book List**
+   ![Book List](screenshots/book_list.png)
+
+3. **Book Details**
+   ![Book Details](screenshots/book_details.png)
+
+4. **Shopping Cart**
+   ![Shopping Cart](screenshots/shopping_cart.png)
+
+5. **Checkout**
+   ![Checkout](screenshots/checkout.png)
+
+---
+
+## 🤝 Contribution
+
+Contributions are welcome! If you have ideas to improve this application, feel free to fork this repository and submit a pull request.
+
+---
+
+## 📝 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+## 👤 Author
+
+- @boyaditya
+- @arulzkash
+- @harismln22
+- @ridhonaufaldyy
+- Muhamad Irfan
