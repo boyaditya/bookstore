@@ -41,7 +41,7 @@ class Cart extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-
+    // Method untuk menambahkan item ke keranjang
     public function add()
     {
         $user_id = $this->session->userdata('user')['_id']->{'$id'};
@@ -52,19 +52,17 @@ class Cart extends CI_Controller
         redirect('cart');
     }
 
+    // Method untuk menghapus item dari keranjang
     public function delete()
     {
         $user_id = $this->session->userdata('user')['_id']->{'$id'};
         $book_id = $this->input->post('book_id');
 
-        // var_dump($book_id);
-        // die();
-
         $this->Cart_model->removeFromCart($user_id, $book_id);
         redirect('cart');
     }
 
-
+    // Method untuk mengupdate jumlah item di keranjang
     public function update_quantity()
     {
         $user_id = $this->session->userdata('user')['_id']->{'$id'};

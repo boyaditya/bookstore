@@ -23,7 +23,6 @@ class Home extends CI_Controller
         $data['title_page'] = 'Home';
         $data['books'] = $this->Book_model->getBooksHome();
         $data['user'] = $this->User_model->getUserBySession();
-        // var_dump($data['user']);
 
         // Load view dan kirim data ke view
         $this->load->view('templates/header', $data);

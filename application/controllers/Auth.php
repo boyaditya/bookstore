@@ -45,7 +45,6 @@ class Auth extends CI_Controller {
             if ($user) {
                 $this->session->set_userdata('user', $user);
                 redirect('home/index'); // Redirect ke halaman dashboard jika berhasil login
-                // var_dump($user);
             } else {
                 $this->session->set_flashdata('error', 'Login gagal! Cek email dan password Anda.');
                 redirect('auth/login');

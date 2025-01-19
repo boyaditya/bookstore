@@ -2,7 +2,8 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Cart_model extends CI_Model
-{
+{   
+    // Fungsi Get Carts
     public function getCarts()
     {
         $this->load->library('mongo_db');
@@ -10,6 +11,7 @@ class Cart_model extends CI_Model
         return $data;
     }
 
+    // Fungsi Get Cart By ID
     public function getCartById($id)
     {
         $this->load->library('mongo_db');
@@ -17,6 +19,7 @@ class Cart_model extends CI_Model
         return !empty($data) ? $data[0] : null;
     }
 
+    // Fungsi Get Carts By User ID
     public function getCartsByUserId($user_id)
     {
         $this->load->library('mongo_db');
@@ -25,6 +28,7 @@ class Cart_model extends CI_Model
         return $data;
     }
 
+    // Fungsi Get Cart Items (Detail Keranjang)
     public function getCartItems($cart_id)
     {   
         if (empty($cart_id)) {
@@ -49,6 +53,7 @@ class Cart_model extends CI_Model
         return $items;
     }
 
+    // Fungsi Add To Cart (Menambahkan Buku ke Keranjang)
     public function addToCart($user_id, $book_id, $quantity)
     {
         $this->load->library('mongo_db');
@@ -97,7 +102,7 @@ class Cart_model extends CI_Model
         }
     }
 
-
+    // Fungsi Remove From Cart (Menghapus Buku dari Keranjang)
     public function removeFromCart($user_id, $book_id)
     {
         $this->load->library('mongo_db');
@@ -119,6 +124,7 @@ class Cart_model extends CI_Model
         }
     }
 
+    // Fungsi Update Quantity (Mengupdate Judmlah Buku di Keranjang)
     public function updateQuantity($user_id, $book_id, $quantity)
     {
         $this->load->library('mongo_db');
