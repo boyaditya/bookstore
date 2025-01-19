@@ -1,4 +1,4 @@
-# 📚 Bookstore Application
+# 📚 Berbuku.com (Bookstore Website)
 
 ## 📖 Description
 Bookstore is a web-based application that allows users to explore, search, and purchase books online. The application includes features such as book CRUD, book search, detailed book views, login, register, shopping cart, and checkout process.
