@@ -51,27 +51,20 @@ This application is built using the CodeIgniter 3 framework and NoSQL MongoDB da
 Follow these steps to run the application locally:
 
 1. Clone this repository:
-   ```bash
-   git clone https://github.com/arulzkash/bookstore.git
-   ```
 
 2. Navigate to the project directory:
    ```bash
-   cd bookstore
+   cd ci3-mongodb-bookstore-web
    ```
 
 3. Configure MongoDB database:
    - Ensure MongoDB is installed and running on your system.
    - Set up the database connection in the `application/config/mongo_db.php` file.
 
-4. Set up the base URL in `application/config/config.php`:
-   ```php
-   $config['base_url'] = 'http://localhost/bookstore/';
-   ```
 
-5. Run a local server:
+4. Run a local server:
    - If using XAMPP or WAMP, move the project folder to the `htdocs` directory.
-   - Access the application via browser at `http://localhost/bookstore`.
+   - Access the application via browser at `http://localhost/ci3-mongodb-bookstore-web` (default port).
 
 ---
 
